@@ -1,16 +1,22 @@
 ﻿using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
-using System.IO;
 
 namespace MyBackup
 {
-    internal class ScheduleManager
+    internal class ScheduleManager : JsonManager
     {
+        private const string path = @"../../Configs/schedule.json";
+
         /// <summary>
         /// 排程
         /// </summary>
         private List<Schedule> schedules;
 
+        /// <summary>
+        /// 索引子
+        /// </summary>
+        /// <param name="index">索引</param>
+        /// <returns></returns>
         public Schedule this[int index]
         {
             get
@@ -28,10 +34,13 @@ namespace MyBackup
             return schedules.Count;
         }
 
-        public void ProcessSchedules()
+        /// <summary>
+        /// 處理JSON設定檔
+        /// </summary>
+        public override void ProcessJsonConfig()
         {
-            JObject scheduleData = JObject.Parse(File.ReadAllText("schedule.json"));
-            JArray scheduleDataArray = (JArray)scheduleData["schedules"];
+            JObject configObject = this.GetJsonObject(path);
+            JArray scheduleDataArray = (JArray)configObject["schedules"];
             this.schedules = scheduleDataArray.ToObject<List<Schedule>>();
         }
     }

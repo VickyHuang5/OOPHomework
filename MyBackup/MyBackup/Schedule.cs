@@ -8,17 +8,17 @@
         /// <summary>
         /// 排程所處理的檔案格式
         /// </summary>
-        private string ext;
+        public string Ext { get; private set; }
 
         /// <summary>
         /// 排程執行的間隔
         /// </summary>
-        private string interval;
+        public string Interval { get; private set; }
 
         /// <summary>
         /// 排程所處理的時間
         /// </summary>
-        private string time;
+        public string Time { get; private set; }
 
         /// <summary>
         /// Constructor
@@ -30,33 +30,9 @@
                         string time,
                         string interval)
         {
-            this.ext = ext;
-            this.time = time;
-            this.interval = interval;
-        }
-
-        /// <summary>
-        /// 排程所處理的檔案格式
-        /// </summary>
-        public string Ext
-        {
-            get { return this.ext; }
-        }
-
-        /// <summary>
-        /// 排程執行的間隔
-        /// </summary>
-        public string Interval
-        {
-            get { return this.interval; }
-        }
-
-        /// <summary>
-        /// 排程所處理的時間
-        /// </summary>
-        public string Time
-        {
-            get { return this.time; }
+            this.Ext = ext;
+            this.Time = time;
+            this.Interval = interval;
         }
     }
 }

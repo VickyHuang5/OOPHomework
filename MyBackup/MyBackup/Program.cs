@@ -8,7 +8,7 @@ namespace MyBackup
         private static void Main(string[] args)
         {
             ConfigManager configManager = new ConfigManager();
-            configManager.ProcessConfigs();
+            configManager.ProcessJsonConfig();
 
             Console.WriteLine("Config:");
             for (int i = 0; i < configManager.Count(); i++)
@@ -18,7 +18,7 @@ namespace MyBackup
             }
 
             ScheduleManager scheduleManager = new ScheduleManager();
-            scheduleManager.ProcessSchedules();
+            scheduleManager.ProcessJsonConfig();
 
             Console.WriteLine("Schedule:");
             for (int i = 0; i < scheduleManager.Count(); i++)

@@ -1,19 +1,28 @@
 ﻿using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
-using System.IO;
 
 namespace MyBackup
 {
     /// <summary>
     /// 設定管理
     /// </summary>
-    public class ConfigManager
+    public class ConfigManager : JsonManager
     {
         /// <summary>
-        /// 設定
+        /// config.json檔路徑
+        /// </summary>
+        private const string path = @"../../Configs/config.json";
+
+        /// <summary>
+        /// 設定清單
         /// </summary>
         private List<Config> configs;
 
+        /// <summary>
+        /// 索引子
+        /// </summary>
+        /// <param name="index">索引</param>
+        /// <returns></returns>
         public Config this[int index]
         {
             get
@@ -31,10 +40,13 @@ namespace MyBackup
             return configs.Count;
         }
 
-        public void ProcessConfigs()
+        /// <summary>
+        /// 處理JSON設定檔
+        /// </summary>
+        public override void ProcessJsonConfig()
         {
-            JObject configData = JObject.Parse(File.ReadAllText("config.json"));
-            JArray configDataArray = (JArray)configData["configs"];
+            JObject configObject = this.GetJsonObject(path);
+            JArray configDataArray = (JArray)configObject["configs"];
             this.configs = configDataArray.ToObject<List<Config>>();
         }
     }
