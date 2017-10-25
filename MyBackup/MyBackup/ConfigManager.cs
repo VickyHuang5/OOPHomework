@@ -11,7 +11,7 @@ namespace MyBackup
         /// <summary>
         /// config.json檔路徑
         /// </summary>
-        private const string path = @"../../Configs/config.json";
+        private const string Path = @"../../Configs/config.json";
 
         /// <summary>
         /// 設定清單
@@ -22,12 +22,12 @@ namespace MyBackup
         /// 索引子
         /// </summary>
         /// <param name="index">索引</param>
-        /// <returns></returns>
+        /// <returns>設定物件</returns>
         public Config this[int index]
         {
             get
             {
-                return configs[index];
+                return this.configs[index];
             }
         }
 
@@ -35,9 +35,9 @@ namespace MyBackup
         /// 筆數
         /// </summary>
         /// <returns>設定筆數</returns>
-        public int Count()
+        public override int Count()
         {
-            return configs.Count;
+            return this.configs.Count;
         }
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace MyBackup
         /// </summary>
         public override void ProcessJsonConfig()
         {
-            JObject configObject = this.GetJsonObject(path);
+            JObject configObject = this.GetJsonObject(Path);
             JArray configDataArray = (JArray)configObject["configs"];
             this.configs = configDataArray.ToObject<List<Config>>();
         }

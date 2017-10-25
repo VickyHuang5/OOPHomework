@@ -3,9 +3,15 @@ using System.Collections.Generic;
 
 namespace MyBackup
 {
+    /// <summary>
+    /// 排程管理
+    /// </summary>
     internal class ScheduleManager : JsonManager
     {
-        private const string path = @"../../Configs/schedule.json";
+        /// <summary>
+        /// schedule.json檔路徑
+        /// </summary>
+        private const string Path = @"../../Configs/schedule.json";
 
         /// <summary>
         /// 排程
@@ -16,12 +22,12 @@ namespace MyBackup
         /// 索引子
         /// </summary>
         /// <param name="index">索引</param>
-        /// <returns></returns>
+        /// <returns>排程物件</returns>
         public Schedule this[int index]
         {
             get
             {
-                return schedules[index];
+                return this.schedules[index];
             }
         }
 
@@ -29,9 +35,9 @@ namespace MyBackup
         /// 筆數
         /// </summary>
         /// <returns>排程筆數</returns>
-        public int Count()
+        public override int Count()
         {
-            return schedules.Count;
+            return this.schedules.Count;
         }
 
         /// <summary>
@@ -39,7 +45,7 @@ namespace MyBackup
         /// </summary>
         public override void ProcessJsonConfig()
         {
-            JObject configObject = this.GetJsonObject(path);
+            JObject configObject = this.GetJsonObject(Path);
             JArray scheduleDataArray = (JArray)configObject["schedules"];
             this.schedules = scheduleDataArray.ToObject<List<Schedule>>();
         }

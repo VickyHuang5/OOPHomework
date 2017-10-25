@@ -9,6 +9,12 @@ namespace MyBackup
     public abstract class JsonManager
     {
         /// <summary>
+        /// 計數
+        /// </summary>
+        /// <returns>筆數</returns>
+        public abstract int Count();
+
+        /// <summary>
         /// 處理JSON設定檔
         /// </summary>
         public abstract void ProcessJsonConfig();
