@@ -27,15 +27,13 @@ namespace MyBackup.Services
         /// </summary>
         public void DoBackup()
         {
-            int i = 1;
-            foreach (JsonManager manager in this.managers)
+            List<Candidate> Candidates = this.FindFiles();
+            foreach (Candidate Candidate in Candidates)
             {
-                Console.WriteLine($"Manager{i}設定個數:{manager.Count().ToString()}");
-                i++;
+                this.BroadcastToHandlers(Candidate);
             }
 
-            Console.WriteLine("任意鍵離開.");
-            Console.ReadKey();
+            Console.WriteLine("DoBackup done.");
         }
 
         /// <summary>
@@ -47,6 +45,56 @@ namespace MyBackup.Services
             {
                 this.managers[i].ProcessJsonConfig();
             }
+
+            Console.WriteLine("ProcessJsonConfigs done.");
+        }
+
+        /// <summary>
+        /// 轉發Handler
+        /// </summary>
+        /// <param name="candidate">描述待處理檔案的資訊</param>
+        private void BroadcastToHandlers(Candidate candidate)
+        {
+            byte[] target = null;
+            List<IHandler> handlers = this.FindHandlers(candidate);
+            foreach (IHandler handler in handlers)
+            {
+                target = handler.Perform(candidate, target);
+            }
+
+            Console.WriteLine("BroadcastToHandlers done.");
+        }
+
+        /// <summary>
+        /// 搜尋檔案
+        /// </summary>
+        /// <returns>Candidate清單</returns>
+        private List<Candidate> FindFiles()
+        {
+            // Homework 4
+            List<Candidate> fileList = new List<Candidate>();
+            Console.WriteLine("FindFiles done.");
+            return fileList;
+        }
+
+        /// <summary>
+        /// 搜尋處理器
+        /// </summary>
+        /// <param name="candidate">描述待處理檔案的資訊</param>
+        /// <returns>處理器清單</returns>
+        private List<IHandler> FindHandlers(Candidate candidate)
+        {
+            List<IHandler> handlers = new List<IHandler>();
+            handlers.Add(HandlerFactory.Create("file"));
+
+            foreach (string handler in candidate.Config.Handlers)
+            {
+                handlers.Add(HandlerFactory.Create(handler));
+            }
+
+            handlers.Add(HandlerFactory.Create(candidate.Config.Destination));
+            Console.WriteLine("FindHandlers done.");
+            return handlers;
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using MyBackup.Services;
+using System;
 
 namespace MyBackup
 {
@@ -16,6 +17,8 @@ namespace MyBackup
             MyBackupService backupService = new MyBackupService();
             backupService.ProcessJsonConfigs();
             backupService.DoBackup();
+            Console.WriteLine("任意鍵離開.");
+            Console.ReadKey();
         }
     }
 }
