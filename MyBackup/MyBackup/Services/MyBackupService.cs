@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace MyBackup.Services
 {
@@ -31,6 +32,8 @@ namespace MyBackup.Services
             {
                 this.BroadcastToHandlers(Candidate);
             }
+
+            Console.WriteLine("DoBackup done.");
         }
 
         /// <summary>
@@ -42,6 +45,8 @@ namespace MyBackup.Services
             {
                 this.managers[i].ProcessJsonConfig();
             }
+
+            Console.WriteLine("ProcessJsonConfigs done.");
         }
 
         /// <summary>
@@ -56,6 +61,8 @@ namespace MyBackup.Services
             {
                 target = handler.Perform(candidate, target);
             }
+
+            Console.WriteLine("BroadcastToHandlers done.");
         }
 
         /// <summary>
@@ -66,7 +73,7 @@ namespace MyBackup.Services
         {
             // Homework 4
             List<Candidate> fileList = new List<Candidate>();
-
+            Console.WriteLine("FindFiles done.");
             return fileList;
         }
 
@@ -86,6 +93,7 @@ namespace MyBackup.Services
             }
 
             handlers.Add(HandlerFactory.Create(candidate.Config.Destination));
+            Console.WriteLine("FindHandlers done.");
             return handlers;
         }
     }

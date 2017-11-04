@@ -1,4 +1,6 @@
-﻿namespace MyBackup.Handlers
+﻿using System.IO;
+
+namespace MyBackup.Handlers
 {
     /// <summary>
     /// 目錄處理器
@@ -31,7 +33,11 @@
         /// <returns>byte陣列</returns>
         private byte[] CopyToDirectory(Candidate candidate, byte[] target)
         {
-            // TODO:實作
+            using (FileStream fileStream = new FileStream(candidate.Config.Dir + candidate.Name, FileMode.Create, FileAccess.Write))
+            {
+                fileStream.Write(target, 0, target.Length);
+            }
+
             return target;
         }
     }
