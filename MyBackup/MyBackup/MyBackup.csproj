@@ -43,6 +43,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Finder\AbstractFileFinder.cs" />
+    <Compile Include="Finder\FileFinderFactory.cs" />
+    <Compile Include="Finder\LocalFileFinder.cs" />
+    <Compile Include="Finder\IFileFinder.cs" />
     <Compile Include="Handlers\AbstractHandler.cs" />
     <Compile Include="Handlers\DirectoryHandler.cs" />
     <Compile Include="Handlers\EncodeHandler.cs" />
