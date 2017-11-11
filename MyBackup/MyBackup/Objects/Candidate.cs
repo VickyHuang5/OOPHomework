@@ -9,28 +9,15 @@
         /// Constructor
         /// </summary>
         /// <param name="config">設定檔物件</param>
-        /// <param name="fileDateTime">檔案的日期與時間</param>
-        /// <param name="name">檔案名稱</param>
-        /// <param name="processName">處理方式</param>
-        /// <param name="size">檔案大小</param>
-        public Candidate(
-            Config config,
-            string fileDateTime,
-            string name,
-            string processName,
-            string size)
+        public Candidate(Config config)
         {
             this.Config = config;
-            this.FileDateTime = fileDateTime;
-            this.Name = name;
-            this.ProcessName = processName;
-            this.Size = size;
         }
 
         /// <summary>
         /// 設定檔物件
         /// </summary>
-        public Config Config { get; set; }
+        public Config Config { get; private set; }
 
         /// <summary>
         /// 檔案的日期與時間

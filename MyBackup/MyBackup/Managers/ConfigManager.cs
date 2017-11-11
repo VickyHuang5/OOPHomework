@@ -16,7 +16,7 @@ namespace MyBackup
         /// <summary>
         /// 設定清單
         /// </summary>
-        private List<Config> configs;
+        public List<Config> Configs = new List<Config>();
 
         /// <summary>
         /// 索引子
@@ -27,7 +27,7 @@ namespace MyBackup
         {
             get
             {
-                return this.configs[index];
+                return this.Configs[index];
             }
         }
 
@@ -37,7 +37,7 @@ namespace MyBackup
         /// <returns>設定筆數</returns>
         public override int Count()
         {
-            return this.configs.Count;
+            return this.Configs.Count;
         }
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace MyBackup
         {
             JObject configObject = this.GetJsonObject(Path);
             JArray configDataArray = (JArray)configObject["configs"];
-            this.configs = configDataArray.ToObject<List<Config>>();
+            this.Configs = configDataArray.ToObject<List<Config>>();
         }
     }
 }

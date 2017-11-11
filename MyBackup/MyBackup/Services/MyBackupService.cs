@@ -27,10 +27,15 @@ namespace MyBackup.Services
         /// </summary>
         public void DoBackup()
         {
-            List<Candidate> Candidates = this.FindFiles();
-            foreach (Candidate Candidate in Candidates)
+            ConfigManager configManager = this.managers[0] as ConfigManager;
+            foreach (var config in configManager.Configs)
             {
-                this.BroadcastToHandlers(Candidate);
+                IFileFinder fileFinder = FileFinderFactory.Create("file", config);
+
+                foreach (Candidate candidate in fileFinder)
+                {
+                    this.BroadcastToHandlers(candidate);
+                }
             }
 
             Console.WriteLine("DoBackup done.");
