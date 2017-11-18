@@ -1,4 +1,6 @@
-﻿namespace MyBackup
+﻿using MyBackupCandidate;
+
+namespace MyBackup
 {
     /// <summary>
     /// 處理器介面

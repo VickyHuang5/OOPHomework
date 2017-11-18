@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using MyBackupCandidate;
+using System.IO;
 
 namespace MyBackup
 {
@@ -31,6 +32,24 @@ namespace MyBackup
         }
 
         /// <summary>
+        /// 覆寫建立待處理檔案資訊
+        /// </summary>
+        /// <param name="fileName">檔案名稱</param>
+        /// <returns>待處理檔案資訊</returns>
+        protected override Candidate CreateCandidate(string fileName)
+        {
+            FileInfo fileInfo;
+            Candidate candidate = null;
+            if (File.Exists(fileName))
+            {
+                fileInfo = new FileInfo(fileName);
+                candidate = CandidateFactory.Create(this.config, fileName, fileInfo.CreationTime, fileInfo.Length);
+            }
+
+            return candidate;
+        }
+
+        /// <summary>
         /// 取得子目錄檔案
         /// </summary>
         /// <param name="config">設定</param>
@@ -38,21 +57,6 @@ namespace MyBackup
         private string[] GetSubDirectoryFiles(Config config)
         {
             return Directory.GetFiles(config.Location);
-        }
-
-        /// <summary>
-        /// 建立待處理檔案的資訊
-        /// </summary>
-        /// <param name="fileName">檔案名稱</param>
-        /// <returns>待處理檔案的資訊</returns>
-        protected override Candidate CreateCandidate(string fileName)
-        {
-            FileInfo fileInfo = new FileInfo(fileName);
-            Candidate candidate = new Candidate(config);
-            candidate.FileDateTime = fileInfo.CreationTime.ToString();
-            candidate.Name = fileInfo.Name;
-            candidate.Size = fileInfo.Length.ToString();
-            return candidate;
         }
     }
 }

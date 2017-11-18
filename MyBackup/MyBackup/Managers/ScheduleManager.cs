@@ -9,14 +9,14 @@ namespace MyBackup
     internal class ScheduleManager : JsonManager
     {
         /// <summary>
+        /// 排程
+        /// </summary>
+        public List<Schedule> Schedules;
+
+        /// <summary>
         /// schedule.json檔路徑
         /// </summary>
         private const string Path = @"../../Configs/schedule.json";
-
-        /// <summary>
-        /// 排程
-        /// </summary>
-        private List<Schedule> schedules;
 
         /// <summary>
         /// 索引子
@@ -27,27 +27,27 @@ namespace MyBackup
         {
             get
             {
-                return this.schedules[index];
+                return this.Schedules[index];
             }
         }
 
         /// <summary>
-        /// 筆數
+        /// 覆寫筆數
         /// </summary>
         /// <returns>排程筆數</returns>
         public override int Count()
         {
-            return this.schedules.Count;
+            return this.Schedules.Count;
         }
 
         /// <summary>
-        /// 處理JSON設定檔
+        /// 覆寫處理JSON設定檔
         /// </summary>
         public override void ProcessJsonConfig()
         {
             JObject configObject = this.GetJsonObject(Path);
             JArray scheduleDataArray = (JArray)configObject["schedules"];
-            this.schedules = scheduleDataArray.ToObject<List<Schedule>>();
+            this.Schedules = scheduleDataArray.ToObject<List<Schedule>>();
         }
     }
 }

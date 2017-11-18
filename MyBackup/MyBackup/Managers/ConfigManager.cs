@@ -9,14 +9,14 @@ namespace MyBackup
     public class ConfigManager : JsonManager
     {
         /// <summary>
-        /// config.json檔路徑
-        /// </summary>
-        private const string Path = @"../../Configs/config.json";
-
-        /// <summary>
         /// 設定清單
         /// </summary>
         public List<Config> Configs = new List<Config>();
+
+        /// <summary>
+        /// config.json檔路徑
+        /// </summary>
+        private const string Path = @"../../Configs/config.json";
 
         /// <summary>
         /// 索引子
@@ -32,7 +32,7 @@ namespace MyBackup
         }
 
         /// <summary>
-        /// 筆數
+        /// 覆寫筆數
         /// </summary>
         /// <returns>設定筆數</returns>
         public override int Count()
@@ -41,7 +41,7 @@ namespace MyBackup
         }
 
         /// <summary>
-        /// 處理JSON設定檔
+        /// 覆寫處理JSON設定檔
         /// </summary>
         public override void ProcessJsonConfig()
         {
