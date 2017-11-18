@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyBackupCandidate;
+using System;
 using System.IO;
 using System.Security.Cryptography;
 
@@ -10,7 +11,7 @@ namespace MyBackup.Handlers
     public class EncodeHandler : AbstractHandler
     {
         /// <summary>
-        /// 執行
+        /// 覆寫執行
         /// </summary>
         /// <param name="candidate">描述待處理檔案的資訊</param>
         /// <param name="target">處理目標</param>

@@ -15,8 +15,12 @@ namespace MyBackup
         private static void Main(string[] args)
         {
             MyBackupService backupService = new MyBackupService();
-            backupService.ProcessJsonConfigs();
-            backupService.DoBackup();
+
+            // 簡單備份
+            backupService.SimpleBackup();
+
+            // 排程備份
+            backupService.ScheduledBackup();
             Console.WriteLine("任意鍵離開.");
             Console.ReadKey();
         }

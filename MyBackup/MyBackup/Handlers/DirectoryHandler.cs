@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using MyBackupCandidate;
+using System.IO;
 
 namespace MyBackup.Handlers
 {
@@ -8,7 +9,7 @@ namespace MyBackup.Handlers
     public class DirectoryHandler : AbstractHandler
     {
         /// <summary>
-        /// 執行
+        /// 覆寫執行
         /// </summary>
         /// <param name="candidate">描述待處理檔案的資訊</param>
         /// <param name="target">處理目標</param>
