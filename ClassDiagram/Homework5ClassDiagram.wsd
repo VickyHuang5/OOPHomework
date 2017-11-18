@@ -1,0 +1,70 @@
+@startuml Homework5ClassDiagram
+
+class MyBackupService {
+    -managers
+    -taskDispatcher
+    +MyBackupService()
+    +SimpleBackup()
+    +ScheduledBackup()
+    -Init()
+    -ProcessJsonConfigs()
+    -FindFiles()
+}
+
+class TaskDispatcher{
+    -task
+    +SimpleTask()
+    +ScheduledTask()
+    -ExecuteTask()
+}
+
+class TaskFactory{
+    {static} +Create()
+}
+
+interface Task {
+    +Execute()
+}
+
+abstract class AbstractTask {
+    #fileFinder
+    +Execute()
+    #BroadcastToHandlers()
+    #FindHandlers()
+}
+
+class SimpleTask {
+    +Execute()
+}
+
+class ScheduledTask {
+    +Execute()
+}
+
+class Candidate{
+    -config
+    -fileDateTime
+    -name
+    -processName
+    -size
+    +Config
+    +FileDateTime
+    +Name
+    +ProcessName
+    +Size
+    ~Candidate()
+}
+
+class CandidateFactory{
+    +Create()
+}
+
+MyBackupService -> TaskDispatcher
+TaskDispatcher -> TaskFactory
+TaskFactory -> Task
+Task <|.. AbstractTask
+AbstractTask <|-- SimpleTask
+AbstractTask <|-- ScheduledTask
+
+CandidateFactory -> Candidate
+@enduml
