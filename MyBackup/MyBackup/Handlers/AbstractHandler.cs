@@ -1,4 +1,6 @@
-﻿namespace MyBackup
+﻿using MyBackupCandidate;
+
+namespace MyBackup
 {
     /// <summary>
     /// 抽象處理器

@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Candidate\CandidateFactory.cs" />
     <Compile Include="Finder\AbstractFileFinder.cs" />
     <Compile Include="Finder\FileFinderFactory.cs" />
     <Compile Include="Finder\LocalFileFinder.cs" />
@@ -53,7 +54,7 @@
     <Compile Include="Handlers\FileHandler.cs" />
     <Compile Include="Handlers\IHandler.cs" />
     <Compile Include="Handlers\ZipHandler.cs" />
-    <Compile Include="Objects\Candidate.cs" />
+    <Compile Include="Candidate\Candidate.cs" />
     <Compile Include="Objects\Config.cs" />
     <Compile Include="Managers\ConfigManager.cs" />
     <Compile Include="Handlers\HandlerFactory.cs" />
@@ -63,6 +64,12 @@
     <Compile Include="Objects\Schedule.cs" />
     <Compile Include="Managers\ScheduleManager.cs" />
     <Compile Include="Services\MyBackupService.cs" />
+    <Compile Include="Task\AbstractTask.cs" />
+    <Compile Include="Task\ITask.cs" />
+    <Compile Include="Task\ScheduledTask.cs" />
+    <Compile Include="Task\SimpleTask.cs" />
+    <Compile Include="Task\TaskDispatcher.cs" />
+    <Compile Include="Task\TaskFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

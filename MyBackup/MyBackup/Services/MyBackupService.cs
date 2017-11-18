@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyBackupCandidate;
+using System;
 using System.Collections.Generic;
 
 namespace MyBackup.Services
@@ -14,37 +15,49 @@ namespace MyBackup.Services
         private List<JsonManager> managers = new List<JsonManager>();
 
         /// <summary>
+        /// 任務分配器
+        /// </summary>
+        private TaskDispatcher taskDispatcher;
+
+        /// <summary>
         /// Constructor
         /// </summary>
         public MyBackupService()
         {
             this.managers.Add(new ConfigManager());
             this.managers.Add(new ScheduleManager());
+            this.taskDispatcher = new TaskDispatcher();
+            this.Init();
         }
 
         /// <summary>
-        /// 備份
+        /// 簡單備份
         /// </summary>
-        public void DoBackup()
+        public void SimpleBackup()
         {
-            ConfigManager configManager = this.managers[0] as ConfigManager;
-            foreach (var config in configManager.Configs)
-            {
-                IFileFinder fileFinder = FileFinderFactory.Create("file", config);
+            this.taskDispatcher.SimpleTask(this.managers);
+        }
 
-                foreach (Candidate candidate in fileFinder)
-                {
-                    this.BroadcastToHandlers(candidate);
-                }
-            }
+        /// <summary>
+        /// 排程備份
+        /// </summary>
+        public void ScheduledBackup()
+        {
+            this.taskDispatcher.ScheduledTask(this.managers);
+        }
 
-            Console.WriteLine("DoBackup done.");
+        /// <summary>
+        /// 初始化
+        /// </summary>
+        private void Init()
+        {
+            this.ProcessJsonConfigs();
         }
 
         /// <summary>
         /// 處理JSON設定檔
         /// </summary>
-        public void ProcessJsonConfigs()
+        private void ProcessJsonConfigs()
         {
             for (int i = 0; i < this.managers.Count; i++)
             {
@@ -52,22 +65,6 @@ namespace MyBackup.Services
             }
 
             Console.WriteLine("ProcessJsonConfigs done.");
-        }
-
-        /// <summary>
-        /// 轉發Handler
-        /// </summary>
-        /// <param name="candidate">描述待處理檔案的資訊</param>
-        private void BroadcastToHandlers(Candidate candidate)
-        {
-            byte[] target = null;
-            List<IHandler> handlers = this.FindHandlers(candidate);
-            foreach (IHandler handler in handlers)
-            {
-                target = handler.Perform(candidate, target);
-            }
-
-            Console.WriteLine("BroadcastToHandlers done.");
         }
 
         /// <summary>
@@ -80,26 +77,6 @@ namespace MyBackup.Services
             List<Candidate> fileList = new List<Candidate>();
             Console.WriteLine("FindFiles done.");
             return fileList;
-        }
-
-        /// <summary>
-        /// 搜尋處理器
-        /// </summary>
-        /// <param name="candidate">描述待處理檔案的資訊</param>
-        /// <returns>處理器清單</returns>
-        private List<IHandler> FindHandlers(Candidate candidate)
-        {
-            List<IHandler> handlers = new List<IHandler>();
-            handlers.Add(HandlerFactory.Create("file"));
-
-            foreach (string handler in candidate.Config.Handlers)
-            {
-                handlers.Add(HandlerFactory.Create(handler));
-            }
-
-            handlers.Add(HandlerFactory.Create(candidate.Config.Destination));
-            Console.WriteLine("FindHandlers done.");
-            return handlers;
         }
     }
 }
