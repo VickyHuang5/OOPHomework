@@ -48,10 +48,15 @@
     <Compile Include="Finder\FileFinderFactory.cs" />
     <Compile Include="Finder\LocalFileFinder.cs" />
     <Compile Include="Finder\IFileFinder.cs" />
+    <Compile Include="Handlers\AbstractDBHandler.cs" />
     <Compile Include="Handlers\AbstractHandler.cs" />
+    <Compile Include="Handlers\DBAdapter.cs" />
+    <Compile Include="Handlers\DBLogHandler.cs" />
+    <Compile Include="Handlers\DBBackupHandler.cs" />
     <Compile Include="Handlers\DirectoryHandler.cs" />
     <Compile Include="Handlers\EncodeHandler.cs" />
     <Compile Include="Handlers\FileHandler.cs" />
+    <Compile Include="Handlers\IDBHandler.cs" />
     <Compile Include="Handlers\IHandler.cs" />
     <Compile Include="Handlers\ZipHandler.cs" />
     <Compile Include="Candidate\Candidate.cs" />

@@ -3,9 +3,9 @@
 namespace MyBackup
 {
     /// <summary>
-    /// 處理器介面
+    /// 資料庫處理器介面
     /// </summary>
-    public interface IHandler
+    public interface IDBHandler
     {
         /// <summary>
         /// 執行
@@ -14,5 +14,15 @@ namespace MyBackup
         /// <param name="target">處理目標</param>
         /// <returns>byte陣列</returns>
         byte[] Perform(Candidate candidate, byte[] target);
+
+        /// <summary>
+        /// 開啟資料庫連線
+        /// </summary>
+        void OpenConnection();
+
+        /// <summary>
+        /// 關閉資料庫連線
+        /// </summary>
+        void CloseConnection();
     }
 }
