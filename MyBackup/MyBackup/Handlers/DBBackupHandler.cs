@@ -1,11 +1,12 @@
 ﻿using MyBackupCandidate;
+using System;
 
-namespace MyBackup
+namespace MyBackup.Handlers
 {
     /// <summary>
-    /// 處理器介面
+    /// 資料庫備份處理器
     /// </summary>
-    public interface IHandler
+    public class DBBackupHandler : AbstractDBHandler
     {
         /// <summary>
         /// 執行
@@ -13,6 +14,10 @@ namespace MyBackup
         /// <param name="candidate">待處理檔案資訊</param>
         /// <param name="target">處理目標</param>
         /// <returns>byte陣列</returns>
-        byte[] Perform(Candidate candidate, byte[] target);
+        public override byte[] Perform(Candidate candidate, byte[] target)
+        {
+            Console.WriteLine("Perform DBBackup.");
+            return target;
+        }
     }
 }
