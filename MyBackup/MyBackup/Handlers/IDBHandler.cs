@@ -16,13 +16,9 @@ namespace MyBackup
         byte[] Perform(Candidate candidate, byte[] target);
 
         /// <summary>
-        /// 開啟資料庫連線
+        /// 寫入資料庫
         /// </summary>
-        void OpenConnection();
-
-        /// <summary>
-        /// 關閉資料庫連線
-        /// </summary>
-        void CloseConnection();
+        /// <param name="sql">SQL指令</param>
+        void InsertDB(string sql);
     }
 }

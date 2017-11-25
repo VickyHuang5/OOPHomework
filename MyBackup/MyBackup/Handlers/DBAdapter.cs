@@ -23,7 +23,7 @@ namespace MyBackup.Handlers
         /// <param name="candidate">待處理檔案資訊</param>
         /// <param name="target">處理目標</param>
         /// <returns>byte陣列</returns>
-        public override byte[] Perform(Candidate candidate,byte[] target)
+        public override byte[] Perform(Candidate candidate, byte[] target)
         {
             base.Perform(candidate, target);
             this.SaveBackupToDB(candidate, target);
@@ -38,9 +38,9 @@ namespace MyBackup.Handlers
         /// <param name="target">處理目標</param>
         private void SaveBackupToDB(Candidate candidate, byte[] target)
         {
-            this.backupHandler.OpenConnection();
+            string sql = string.Empty;
             this.backupHandler.Perform(candidate, target);
-            this.backupHandler.CloseConnection();
+            this.backupHandler.InsertDB(sql);
         }
 
         /// <summary>
@@ -50,8 +50,9 @@ namespace MyBackup.Handlers
         /// <param name="target">處理目標</param>
         private void SaveLogToDB(Candidate candidate, byte[] target)
         {
-            this.logHandler.OpenConnection();
+            string sql = string.Empty;
             this.logHandler.Perform(candidate, target);
-            this.logHandler.CloseConnection();
-}
+            this.logHandler.InsertDB(sql);
+        }
     }
+}

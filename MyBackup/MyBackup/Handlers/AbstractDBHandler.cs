@@ -1,24 +1,30 @@
 ﻿using MyBackupCandidate;
+using System;
+using System.Data.Common;
+using System.Data.SqlClient;
 
 namespace MyBackup
 {
     /// <summary>
     /// 抽象處理器
     /// </summary>
-    public abstract class AbstractDBHandler: IDBHandler
+    public abstract class AbstractDBHandler : IDBHandler
     {
         /// <summary>
-        /// 關閉資料庫連線
+        /// 寫入資料庫
         /// </summary>
-        public virtual void CloseConnection()
+        /// <param name="sql">SQL指令</param>
+        public virtual void InsertDB(string sql)
         {
-        }
+            string connectionString = string.Empty;
+            using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+            {
+                sqlConnection.Open();
+                SqlCommand sqlCommand = new SqlCommand(sql, sqlConnection);
+                sqlCommand.ExecuteNonQuery();
+            }
 
-        /// <summary>
-        /// 開啟資料庫連線
-        /// </summary>
-        public virtual void OpenConnection()
-        {
+            Console.WriteLine("InsertDB done.");
         }
 
         /// <summary>
