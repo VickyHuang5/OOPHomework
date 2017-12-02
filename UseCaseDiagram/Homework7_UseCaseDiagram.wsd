@@ -1,0 +1,11 @@
+@startuml SimpleBackup
+
+actor User 
+User -> MybackupService : SimpleBackup()
+MybackupService -> TaskDispatcher : SimpleTask()
+TaskDispatcher -> TaskFactory : Create()
+TaskFactory -->> SimpleTask : new
+TaskDispatcher <- TaskFactory : Task
+TaskDispatcher -> SimpleTask : Execute()
+
+@enduml
